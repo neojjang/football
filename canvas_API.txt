@@ -1,0 +1,285 @@
+canvas 元素用于在网页上绘制图形。
+
+创建Canvas 元素
+向HTML5 页面添加canvas 元素。
+规定元素的id、宽度和高度：
+<canvas id=”myCanvas” width=”200″ height=”100″></canvas>
+
+通过JavaScript 来绘制
+canvas 元素本身是没有绘图能力的。所有的绘制工作必须在JavaScript 内部完成：
+<script type=”text/javascript”>
+var c=document.getElementById(“myCanvas”);
+var cxt=c.getContext(“2d”);
+cxt.fillStyle=”#FF0000″;
+cxt.fillRect(0,0,150,75);
+</script>
+
+
+JavaScript 使用id 来寻找canvas 元素：
+var c=document.getElementById(“myCanvas”);
+
+创建context对象：
+var cxt=c.getContext(“2d”);
+getContext(“2d”) 对象是内建的HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及
+
+
+添加图像的方法。
+下面的两行代码绘制一个红色的矩形：
+cxt.fillStyle=”#FF0000″;
+cxt.fillRect(0,0,150,75);
+fillStyle 方法将其染成红色，fillRect 方法规定了形状、位置和尺寸。
+
+理解坐标
+上面的fillRect 方法拥有参数(0,0,150,75)。
+意思是：在画布上绘制150×75 的矩形，从左上角开始(0,0)。
+实例：把鼠标悬停在矩形上可以看到坐标
+
+通过指定从何处开始，在何处结束，来绘制一条线：
+<script type=”text/javascript”>
+var c=document.getElementById(“myCanvas”);
+var cxt=c.getContext(“2d”);
+cxt.moveTo(10,10);
+cxt.lineTo(150,50);
+cxt.lineTo(10,50);
+cxt.stroke();
+</script>
+canvas 元素：
+<canvas id=”myCanvas” width=”200″ height=”100″ style=”border:1px solid #c3c3c3;”>
+Your browser does not support the canvas element.
+</canvas>
+
+
+通过规定尺寸、颜色和位置，来绘制一个圆：
+JavaScript 代码：
+<script type=”text/javascript”>
+var c=document.getElementById(“myCanvas”);
+var cxt=c.getContext(“2d”);
+cxt.fillStyle=”#FF0000″;
+cxt.beginPath();
+cxt.arc(70,18,15,0,Math.PI*2,true);
+cxt.closePath();
+cxt.fill();
+</script>
+canvas 元素：
+<canvas id=”myCanvas” width=”200″ height=”100″ style=”border:1px solid #c3c3c3;”>
+Your browser does not support the canvas element.
+</canvas>
+
+
+实例- 渐变
+使用您指定的颜色来绘制渐变背景：
+JavaScript 代码：
+<script type=”text/javascript”>
+var c=document.getElementById(“myCanvas”);
+var cxt=c.getContext(“2d”);
+var grd=cxt.createLinearGradient(0,0,175,50);
+grd.addColorStop(0,”#FF0000″);
+grd.addColorStop(1,”#00FF00″);
+cxt.fillStyle=grd;
+cxt.fillRect(0,0,175,50);
+</script>
+canvas 元素：
+<canvas id=”myCanvas” width=”200″ height=”100″ style=”border:1px solid #c3c3c3;”>
+Your browser does not support the canvas element.
+</canvas>
+
+
+把一幅图像放置到画布上：
+JavaScript 代码：
+<script type=”text/javascript”>
+var c=document.getElementById(“myCanvas”);
+var cxt=c.getContext(“2d”);
+var img=new Image()
+img.src=”flower.png”
+cxt.drawImage(img,0,0);
+</script>
+canvas 元素：
+<canvas id=”myCanvas” width=”200″ height=”100″ style=”border:1px solid #c3c3c3;”>
+Your browser does not support the canvas element.
+</canvas>
+
+
+创建 canvas 的方法很简单，只需要在 HTML 页面中添加 <canvas>元素：
+<canvas id=“myCanvas” width=“300″ height=“150″>
+Fallback content, in case the browser does not support Canvas.    
+</canvas>
+
+为了能在 JavaScript 中引用元素，最好给元素设置 ID ；也需要给 canvas 设定高度和宽度。
+创建好了画布后，让我们来准备画笔。要在画布中绘制图形需要使用 JavaScript 。首先通过 getElementById函数找到 canvas元素，然后初始化上下文。之后可以使用上下文 API 绘制各种图形。下面的脚本在 canvas 中绘制一个矩形 (点击此处查看效果)：
+// Get a reference to the element.   
+var elem = document.getElementById(‘myCanvas’);   
+// Always check for properties 和 methods, to make sure your code doesn’t break     
+// in other browsers.   
+if (elem && elem.getContext) {   
+  // Get the 2d context.   
+  // Remember: you can only initialize one context per element.   
+  var context = elem.getContext(’2d’);   
+  if (context) {   
+    // You are done! Now you can draw your first rectangle.   
+    // You only need to provide the (x,y) coordinates, followed by the width and     
+    // height dimensions.   
+    context.fillRect(0, 0, 150, 100);   
+  }   
+}  
+
+canvas 教程（二）矩形和线条的绘制
+类别: HTML5 FILE API 应用实例
+ 通过 fillStyle和 strokeStyle 属性可以轻松的设置矩形的填充和线条。颜色值使用方法和 CSS 一样：十六进制数、rgb()、rgba() 和 hsla。通过 fillRect可以绘制带填充的矩形。使用 strokeRect 可以绘制只有边框没有填充的矩形。如果想清除部分 canvas 可以使用 clearRect。上述三个方法的参数相同：x, y, width, height。前两个参数设定 (x,y) 坐标，后两个参数设置矩形的高度和宽度。可以使用 lineWidth属性改变线条粗细。让我们看看使用了fillRect,strokeRect clearRect 和其他的例子：
+context.fillStyle   = ‘#00f’; // blue   
+context.strokeStyle = ‘#f00′; // red   
+context.lineWidth   = 4;   
+// Draw some rectangles.   
+context.fillRect  (0,   0, 150, 50);   
+context.strokeRect(0,  60, 150, 50);   
+context.clearRect (30, 25,  90, 60);   
+context.strokeRect(30, 25,  90, 60);  
+
+
+路径
+通过 canvas 路径（path）可以绘制任意形状。可以先绘制轮廓，然后绘制边框和填充。创建自定义形状很简单，使用 beginPath()开始绘制，然后使用直线、曲线和其他图形绘制你的图形。绘制完毕后调用 fill 和 stroke 即可添加填充或者设置边框。调用 closePath() 结束自定义图形绘制。下面是一个绘制三角形的例子:
+// Set the style properties.   
+context.fillStyle   = ‘#00f’;   
+context.strokeStyle = ‘#f00′;   
+context.lineWidth   = 4;   
+context.beginPath();   
+// Start from the top-left point.   
+context.moveTo(10, 10); // give the (x,y) coordinates   
+context.lineTo(100, 10);   
+context.lineTo(10, 100);   
+context.lineTo(10, 10);   
+// Done! Now fill the shape, 和 draw the stroke.   
+// Note: your shape will not be visible until you call any of the two methods.   
+context.fill();   
+context.stroke();   
+context.closePath();  
+
+
+canvas教程 （三） 插入图片
+类别: HTML5 FILE API 应用实例
+drawImage 方法允许在 canvas 中插入其他图像
+( img 和 canvas 元素) 。在 Opera 中可以再 canvas 中绘制 SVG 图形。此方法比较复杂，可以有3个、5个或9个参数
+
+3个参数：最基本的 drawImage使用方法。一个参数指定图像位置，另两个参数设置图像在 canvas中的位置。
+5个参数：中级的 drawImage 使用方法，包括上面所述3个参数，加两个参数指明插入图像宽度和高度 (如果你想改变图像大小)。
+9个参数：最复杂 drawImage 杂使用方法，包含上述5个参数外，另外4个参数设置源图像中的位置和高度宽度。这些参数允许你在显示图像前动态裁剪源图像。
+
+下面是上述三个使用方法的例子：
+
+// Three arguments: the element, destination (x,y) coordinates.   
+context.drawImage(img_elem, dx, dy);   
+// Five arguments: the element, destination (x,y) coordinates, and destination     
+// width and height (if you want to resize the source image).   
+context.drawImage(img_elem, dx, dy, dw, dh);   
+// Nine arguments: the element, source (x,y) coordinates, source width and     
+// height (for cropping), destination (x,y) coordinates, and destination width     
+// and height (resize).   
+context.drawImage(img_elem, sx, sy, sw, sh, dx, dy, dw, dh);
+
+
+
+
+canvas教程 （四） 像素操作
+类别: HTML5 FILE API 应用实例
+ 2D Context API 提供了三个方法用于像素级操作：createImageData, getImageData, 和putImageData。ImageData对象保存了图像像素值。每个对象有三个属性: width, height 和data。data 属性类型为CanvasPixelArray，用于储存width*height*4个像素值。每一个像素有RGB值和透明度alpha值(其值为 0 至255，包括alpha在内!)。像素的顺序从左至右，从上到下，按行存储。为了更好的理解其原理，让我们来看一个例子——绘制红色矩形
+
+// Create an ImageData object.   
+var imgd = context.createImageData(50,50);   
+var pix = imgd.data;   
+// Loop over each pixel 和 set a transparent red.   
+for (var i = 0; n = pix.length, i <
+n; i += 4) {   
+  pix[i  ] = 255; // red channel   
+  pix[i+3] = 127; // alpha channel   
+}   
+// Draw the ImageData object at the given (x,y) coordinates.   
+context.putImageData(imgd, 0,0);   
+注意: 不是所有浏览器都实现了 createImageData。在支持的浏览器中，需要通过 getImageData 方法获取 ImageData 对象。请参考示例代码。
+通过 ImageData可以完成很多功能。如可以实现图像滤镜，或可以实现数学可视化 (如分形和其他特效)。下面特效实现了简单的颜色反转滤镜：
+
+// Get the CanvasPixelArray from the given coordinates and dimensions.   
+var imgd = context.getImageData(x, y, width, height);   
+var pix = imgd.data;   
+// Loop over each pixel and invert the color.   
+for (var i = 0, n = pix.length; i <
+n; i += 4) {   
+  pix[i  ] = 255 – pix[i  ]; // red   
+  pix[i+1] = 255 – pix[i+1]; // green   
+  pix[i+2] = 255 – pix[i+2]; // blue   
+  // i+3 is alpha (the fourth element)   
+}   
+// Draw the ImageData at the given (x,y) coordinates.   
+context.putImageData(imgd, x, y); 
+
+
+
+canvas教程（五） 文字写入
+类别: HTML5 FILE API 应用实例
+ 虽然最近的 WebKit 版本和 Firefox 3.1 nightly build 才开始支持 Text API ，为了保证文章完整性我决定仍在这里介绍文字 API 。
+context对象可以设置以下 text 属性：
+
+font：文字字体，同 CSSfont-family 属性
+textAlign：文字水平对齐方式。可取属性值: start, end, left,right, center。默认值:start.
+textBaseline：文字竖直对齐方式。可取属性值：top, hanging, middle,alphabetic, ideographic, bottom。默认值：alphabetic
+
+有两个方法可以绘制文字： fillText和 strokeText。第一个绘制带 fillStyle 填充的文字，后者绘制只有 strokeStyle 边框的文字。两者的参数相同：要绘制的文字和文字的位置(x,y) 坐标。还有一个可选选项——最大宽度。如果需要的话，浏览器会缩减文字以让它适应指定宽度。文字对齐属性影响文字与设置的(x,y) 坐标的相对位置。
+
+下面是一个在 canvas 中绘制”hello world” 文字的例子
+
+复制内容到剪贴板
+
+context.fillStyle    = ‘#00f’;   
+context.font         = ‘italic 30px sans-serif’;   
+context.textBaseline = ‘top’;   
+context.fillText  (‘Hello world!’, 0, 0);   
+context.font         = ‘bold 30px sans-serif’;   
+context.strokeText(‘Hello world!’, 0, 50);   
+下图是其效果图
+
+阴影
+
+目前只有 Konqueror 和 Firefox 3.1 nightly build 支持 Shadows API 。API 的属性为
+
+shadowColor：阴影颜色。其值和 CSS 颜色值一致。
+shadowBlur：设置阴影模糊程度。此值越大，阴影越模糊。其效果和 Photoshop 的高斯模糊滤镜相同。
+shadowOffsetX 和 shadowOffsetY：阴影的 x 和 y 偏移量，单位是像素。
+
+下面是
+
+canvas 阴影的例子：
+
+context.shadowOffsetX = 5;   
+context.shadowOffsetY = 5;   
+context.shadowBlur    = 4;   
+context.shadowColor   = ‘rgba(255, 0, 0, 0.5)’;   
+context.fillStyle     = ‘#00f’;   
+context.fillRect(20, 20, 150, 100);  
+
+
+
+
+
+canvas教程 （六） 颜色渐变
+类别: HTML5 FILE API 应用实例
+ 除了 CSS 颜色， fillStyle和 strokeStyle 属性可以设置为 CanvasGradient 对象。——通过 CanvasGradient可以为线条和填充使用颜色渐变。欲创建 CanvasGradient对象，可以使用两个方法：createLinearGradient 和 createRadialGradient。前者创建线性颜色渐变，后者创建圆形颜色渐变。创建颜色渐变对象后，可以使用对象的 addColorStop方法添加颜色中间值。下面的代码演示了颜色渐变使用方法：
+复制内容到剪贴板
+
+// You need to provide the source 和 destination (x,y) coordinates     
+// for the gradient (from where it starts 和 where it ends).   
+var gradient1 = context.createLinearGradient(sx, sy, dx, dy);   
+// Now you can add colors in your gradient.   
+// The first argument tells the position for the color in your gradient. The     
+// accepted value range is from 0 (gradient start) to 1 (gradient end).   
+// The second argument tells the color you want, using the CSS color format.   
+gradient1.addColorStop(0,   ’#f00′); // red   
+gradient1.addColorStop(0.5, ‘#ff0′); // yellow   
+gradient1.addColorStop(1,   ’#00f’); // blue   
+// For the radial gradient you also need to provide source   
+// 和 destination circle radius.   
+// The (x,y) coordinates define the circle center points (start 和     
+// destination).   
+var gradient2 = context.createRadialGradient(sx, sy, sr, dx, dy, dr);   
+// Adding colors to a radial gradient is the same as adding colors to linear     
+// gradients.   
+
+
+
